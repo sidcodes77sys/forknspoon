@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fork N Spoon - Authentic Indian Cuisine in Kharghar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #D84315;
+            --primary-dark: #BF360C;
+            --secondary: #F57C00;
+            --accent: #FFD54F;
+            --bg-light: #FFF8E1;
+            --bg-cream: #FFF3E0;
+            --text-dark: #212121;
+            --text-medium: #424242;
+            --text-light: #757575;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(216, 67, 21, 0.1);
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: linear-gradient(135deg, rgba(216, 67, 21, 0.9) 0%, rgba(245, 124, 0, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=1600&q=80') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(5deg); }
+            50% { transform: translate(-20px, 20px) rotate(-5deg); }
+            75% { transform: translate(20px, 30px) rotate(3deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.4s backwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.6s backwards;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+            background: var(--accent);
+            color: var(--primary-dark);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(216, 67, 21, 0.3);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Menu Preview */
+        .menu-preview {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--text-medium);
+        }
+
+        .menu-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--bg-cream);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(216, 67, 21, 0.2);
+            border-color: var(--primary);
+        }
+
+        .menu-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .menu-card p {
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        .menu-highlights {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .highlight-tag {
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+
+        .info-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(216, 67, 21, 0.2);
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .info-card p, .info-card a {
+            color: var(--text-medium);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .info-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        .hours-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .hours-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--bg-light);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: var(--bg-cream);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(216, 67, 21, 0.15);
+        }
+
+        .stars {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            color: var(--text-medium);
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content h2,
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .menu-grid,
+            .info-container,
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Fork N Spoon</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#info">Visit Us</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Fork N Spoon</h1>
+            <p class="hero-tagline">Authentic Indian Flavors in Kharghar</p>
+            <a href="#menu" class="cta-button">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-content fade-in">
+                <h2>Where Flavor Meets Tradition</h2>
+                <p>Welcome to Fork N Spoon, your neighborhood destination for authentic North Indian and Chinese cuisine in the heart of Kharghar. Since our opening, we've been committed to bringing you the finest flavors at prices that won't break the bank.</p>
+                <p>Every dish is crafted with care, using fresh ingredients and traditional recipes that have been perfected over time. From crispy appetizers to hearty main courses, we serve food that reminds you of home.</p>
+                <p>Our cozy atmosphere and attentive staff create the perfect setting for family dinners, casual lunches, and special celebrations. Come hungry, leave happy!</p>
+            </div>
+            <div class="about-image fade-in">
+                🍽️
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Preview -->
+    <section class="menu-preview" id="menu">
+        <div class="section-header fade-in">
+            <h2>Our Specialties</h2>
+            <p>A taste of what we offer</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade-in">
+                <h3>🍗 Starters</h3>
+                <p>Kick off your meal with our crispy, flavorful appetizers that are loved by all our guests.</p>
+                <div class="menu-highlights">
+                    <span class="highlight-tag">Chicken Lollipop</span>
+                    <span class="highlight-tag">Paneer Chilli</span>
+                    <span class="highlight-tag">Corn Tikki</span>
+                    <span class="highlight-tag">Veg Crispy</span>
+                </div>
+            </div>
+            <div class="menu-card fade-in">
+                <h3>🍛 Main Course</h3>
+                <p>Savor authentic North Indian dishes prepared with aromatic spices and traditional techniques.</p>
+                <div class="menu-highlights">
+                    <span class="highlight-tag">Punjabi Specials</span>
+                    <span class="highlight-tag">Tikka Masala</span>
+                    <span class="highlight-tag">Achari Delights</span>
+                    <span class="highlight-tag">Malai Creations</span>
+                </div>
+            </div>
+            <div class="menu-card fade-in">
+                <h3>🍜 Chinese Cuisine</h3>
+                <p>Experience the perfect fusion of Chinese flavors with an Indian twist that's simply irresistible.</p>
+                <div class="menu-highlights">
+                    <span class="highlight-tag">Triple Fried Rice</span>
+                    <span class="highlight-tag">Schezwan Specials</span>
+                    <span class="highlight-tag">Manchurian</span>
+                    <span class="highlight-tag">Noodles</span>
+                </div>
+            </div>
+            <div class="menu-card fade-in">
+                <h3>🍹 Beverages</h3>
+                <p>Refresh yourself with our selection of drinks and mocktails, perfect to complement your meal.</p>
+                <div class="menu-highlights">
+                    <span class="highlight-tag">Scarlet Lady</span>
+                    <span class="highlight-tag">Canberry Delight</span>
+                    <span class="highlight-tag">Fresh Juices</span>
+                    <span class="highlight-tag">Soft Drinks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section" id="info">
+        <div class="info-container">
+            <div class="info-card fade-in">
+                <div class="info-icon">📍</div>
+                <h3>Location</h3>
+                <p>Shop no. 18, Sai Savali CHS<br>
+                Plot 22, Sector 19 Rd<br>
+                Kesar Symphony, Sector-19<br>
+                Kharghar, Navi Mumbai<br>
+                Maharashtra 410210</p>
+            </div>
+            <div class="info-card fade-in">
+                <div class="info-icon">🕒</div>
+                <h3>Opening Hours</h3>
+                <ul class="hours-list">
+                    <li><span>Monday - Sunday</span></li>
+                    <li><span>Lunch:</span> <span>11:00 AM - 3:30 PM</span></li>
+                    <li><span>Dinner:</span> <span>7:00 PM - 11:00 PM</span></li>
+                </ul>
+            </div>
+            <div class="info-card fade-in">
+                <div class="info-icon">📞</div>
+                <h3>Contact Us</h3>
+                <p>Phone: <a href="tel:+917700088225">+91 77000 88225</a></p>
+                <p style="margin-top: 1rem;">Dine-in | Takeaway<br>Zomato Gold Accepted</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="reviews-container">
+            <div class="section-header fade-in">
+                <h2>What Our Guests Say</h2>
+                <p>⭐ 3.9/5 based on 425+ reviews</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Was my first time going there. The chicken Lollipop was really very good. Very crispy. The rates here are very affordable. The quality of the food is very good. The staff is very attentive."</p>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"I tried scarlet lady and canberry delight in drinks - the taste was wonderful. It was worth for money. Starter we tried corn tikki, murg achari, chicken malai tikka - the taste was wonderful!"</p>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"This is a lovely place, you can sit and peacefully here. Great staff, lip smacking food, great price. Do visit this place. Thumbs up from my side! 😊"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Fork N Spoon</div>
+            <p>Authentic Indian Cuisine in Kharghar</p>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#info">Visit Us</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 Fork N Spoon. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
